@@ -4,11 +4,15 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.Dto.GreetingDto;
 import com.example.demo.Model.Greeting;
+import com.example.demo.Service.GreetingService;
 import com.example.demo.Service.IGreetingService;
 
 /**
@@ -27,6 +31,8 @@ public class GreetingAppController {
     private static final String template = "Hello, %s";
     private final AtomicLong counter= new AtomicLong();
 	private IGreetingService greetingService;
+	@Autowired
+	private GreetingService greetService;
 
     public void GreetingController(IGreetingService greetingService) {
         this.greetingService = greetingService;
@@ -50,5 +56,15 @@ public class GreetingAppController {
     public String greeting() {
         return greetingService.getGreetingMessage();
     }
+    /**
+     * Ability for the Greeting App to save the Greeting Message in the Repository
+     * @param greetdto
+     * @return
+     */
+    @PostMapping("/add")
+	public Greeting addGreeting(@RequestBody GreetingDto greetdto) {
+		Greeting greet = greetService.addGreeting(greetdto);
+		return greet;
+	}
 
 }
