@@ -43,7 +43,7 @@ public class GreetingAppController {
         return new Greeting(counter.incrementAndGet(),String.format(template,name));
     }
     /**
-     * Exted Greeting Controller to use Service  layer to get Simple Greeting Message
+     * Extend Greeting Controller to use Service  layer to get Simple Greeting Message
      * @return HelloWorld
      */
     @GetMapping("/greeting")

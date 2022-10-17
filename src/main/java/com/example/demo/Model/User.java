@@ -8,11 +8,17 @@ public class User {
 
 
 
-	public User(int id, String firstname, String lastname) {
+	public User( String firstname, String lastname) {
 		super();
-		this.id = id;
+
 		this.firstname = firstname;
 		this.lastname = lastname;
+	}
+
+
+
+	public User() {
+		// TODO Auto-generated constructor stub
 	}
 
 
