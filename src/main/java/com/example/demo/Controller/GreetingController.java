@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -87,6 +88,13 @@ public class GreetingController {
 	public User updateUser(@RequestBody UserDto userdto, @RequestParam int id) {
 		User user = userService.updateUser(userdto, id);
 		return user;
+	}
+	/**
+	 * Ability for the Greeting App to Delete a Greeting Messages in the Repository
+	 */
+	@DeleteMapping("/deleteById/{id}")
+	public void deleteById(@PathVariable int id) {
+		userRepo.deleteById(id);
 	}
 
 }

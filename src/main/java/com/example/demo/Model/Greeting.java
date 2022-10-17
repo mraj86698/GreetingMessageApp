@@ -28,6 +28,10 @@ public class Greeting {
         this.name = greetdto.name;
         this.message =greetdto. message;
     }
+	/**
+	 * Getter And Setter Methods
+	 * @return
+	 */
 
     public long getId() {
         return id;
@@ -55,4 +59,8 @@ public class Greeting {
     public void setMessage(String message) {
         this.message = message;
     }
+	@Override
+	public String toString() {
+		return "Greeting [id=" + id + ", name=" + name + ", message=" + message + "]";
+	}
 }
