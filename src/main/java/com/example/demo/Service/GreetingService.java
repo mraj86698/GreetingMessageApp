@@ -25,9 +25,21 @@ public class GreetingService implements IGreetingService {
     }
 
 	@Override
-	public Greeting getGreetByid(long id){
+	public Greeting getGreetingByid(long id){
         return gretRepo.findById(id).orElseThrow(() -> new UserException("User with Id " + id
                 + " Doesn't Exists...!"));
     }
+	/**
+	 * Ability for the Greeting App to Edit a Greeting Messages in the Repository
+	 */
+	 @Override
+		public Greeting updateGreeting(GreetingDto greetdto, long id) {
+	        Greeting greeting=this.getGreetingByid(id);
+	        if(greeting!=null){
+	                greeting.updateGreeting(greetdto);
+	                return gretRepo.save(greeting);
+	        }
+	        return null;
+	    }
 
 }

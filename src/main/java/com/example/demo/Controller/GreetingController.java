@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -71,6 +72,21 @@ public class GreetingController {
 	public Optional<User> getUserById(@PathVariable int id) {
 		return userRepo.findById(id);
 	}
-	
+	/**
+	 * Ability for the Greeting App to List all the Greeting Messages in the Repository
+	 * @return
+	 */
+	@GetMapping("/getall")
+	public List<User> getUser() {
+		return userRepo.findAll();
+	}
+	/**
+	 * Ability for the Greeting App to Edit a Greeting Messages in the Repository
+	 */
+	@PutMapping("/update")
+	public User updateUser(@RequestBody UserDto userdto, @RequestParam int id) {
+		User user = userService.updateUser(userdto, id);
+		return user;
+	}
 
 }
