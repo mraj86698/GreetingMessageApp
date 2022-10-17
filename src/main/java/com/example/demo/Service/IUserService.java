@@ -7,5 +7,6 @@ public interface IUserService {
 
 	String getGreetingMessage(User user);
 	public User addUser(UserDto userdto);
+	public User getUserByid(int id);
 
 }

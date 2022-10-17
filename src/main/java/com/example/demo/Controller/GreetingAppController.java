@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -77,5 +78,14 @@ public class GreetingAppController {
 	public Optional<Greeting> getGreetingById(@PathVariable long id) {
 		return gretRepo.findById(id);
 	}
+	/**
+	 * Ability for the Greeting App to List all the Greeting Messages in the Repository
+	 * @return
+	 */
+	@GetMapping("/getall")
+	public List<Greeting> getUser() {
+		return gretRepo.findAll();
+	}
+
 
 }

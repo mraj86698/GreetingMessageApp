@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Dto.GreetingDto;
+import com.example.demo.Exception.UserException;
 import com.example.demo.Model.Greeting;
 import com.example.demo.Repository.GreetingRepository;
 
@@ -21,6 +22,12 @@ public class GreetingService implements IGreetingService {
 	public Greeting addGreeting(GreetingDto greetdto) {
         Greeting greet = new Greeting(greetdto);
         return gretRepo.save(greet);
+    }
+
+	@Override
+	public Greeting getGreetByid(long id){
+        return gretRepo.findById(id).orElseThrow(() -> new UserException("User with Id " + id
+                + " Doesn't Exists...!"));
     }
 
 }

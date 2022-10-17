@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Dto.UserDto;
+import com.example.demo.Exception.UserException;
 import com.example.demo.Model.User;
 import com.example.demo.Repository.UserRepo;
 
@@ -25,9 +26,14 @@ public abstract class UserService implements IUserService{
         String name = user.toString().isEmpty() ? "Hello world " : user.toString();
         return String.format(template,name);
     }
-    public User addUser(UserDto userdto) {
+    @Override
+	public User addUser(UserDto userdto) {
         User user = new User(userdto);
         return userRepo.save(user);
+    }
+    public User getUserByid(int id){
+        return userRepo.findById(id).orElseThrow(() -> new UserException("User with Id " + id
+                + " Doesn't Exists...!"));
     }
 
 
