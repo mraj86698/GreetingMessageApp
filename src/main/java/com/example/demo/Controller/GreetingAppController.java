@@ -1,9 +1,11 @@
 package com.example.demo.Controller;
 
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Dto.GreetingDto;
 import com.example.demo.Model.Greeting;
-import com.example.demo.Service.GreetingService;
+import com.example.demo.Repository.GreetingRepository;
 import com.example.demo.Service.IGreetingService;
 
 /**
@@ -32,7 +34,7 @@ public class GreetingAppController {
     private final AtomicLong counter= new AtomicLong();
 	private IGreetingService greetingService;
 	@Autowired
-	private GreetingService greetService;
+	private GreetingRepository gretRepo;
 
     public void GreetingController(IGreetingService greetingService) {
         this.greetingService = greetingService;
@@ -63,8 +65,17 @@ public class GreetingAppController {
      */
     @PostMapping("/add")
 	public Greeting addGreeting(@RequestBody GreetingDto greetdto) {
-		Greeting greet = greetService.addGreeting(greetdto);
+		Greeting greet = greetingService.addGreeting(greetdto);
 		return greet;
+	}
+    /**
+     * Ability for the Greeting App to find a Greeting Message by Id in the Repository
+     * @param id
+     * @return
+     */
+	@GetMapping("/getGreetingById/{id}")
+	public Optional<Greeting> getGreetingById(@PathVariable long id) {
+		return gretRepo.findById(id);
 	}
 
 }

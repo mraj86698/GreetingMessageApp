@@ -1,9 +1,11 @@
 package com.example.demo.Controller;
 
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,5 +60,16 @@ public class GreetingController {
 		User user = userService.addUser(userdto);
 		return user;
 	}
+	/**
+	 * Ability for the Greeting App to find a Greeting Message by Id in the Repository
+	 * @param id
+	 * @return
+	 */
+
+	@GetMapping("/getUserById/{id}")
+	public Optional<User> getUserById(@PathVariable int id) {
+		return userRepo.findById(id);
+	}
+
 
 }
