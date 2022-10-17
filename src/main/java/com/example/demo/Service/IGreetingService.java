@@ -8,6 +8,8 @@ public interface IGreetingService {
 
 	public Greeting addGreeting(GreetingDto greetdto);
 
-	Greeting getGreetByid(long id);
+	Greeting getGreetingByid(long id);
+
+	Greeting updateGreeting(GreetingDto greetdto, long id);
 
 }
